@@ -3,12 +3,20 @@ import os
 
 # Monkey-patch Django's BaseContext.__copy__ for Python 3.14 compatibility
 import django.template.context as ctx
-_orig_copy = ctx.BaseContext.__copy__
-def _patched_copy(self):
-    duplicate = object.__new__(self.__class__)
-    duplicate.dicts = self.dicts[:]
+
+def _patched_base_copy(self):
+    """Replace copy(super()) with proper instance creation for Python 3.14."""
+    cls = self.__class__
+    duplicate = cls.__new__(cls)
+    for key in self.__dict__:
+        val = self.__dict__[key]
+        if key == 'dicts':
+            object.__setattr__(duplicate, key, val[:])
+        else:
+            object.__setattr__(duplicate, key, val)
     return duplicate
-ctx.BaseContext.__copy__ = _patched_copy
+
+ctx.BaseContext.__copy__ = _patched_base_copy
 
 from django.core.wsgi import get_wsgi_application
 
