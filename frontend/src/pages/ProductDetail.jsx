@@ -62,6 +62,7 @@ const ProductDetail = () => {
             <img
               src={getImageUrl(selectedImage?.image)}
               alt={product.name}
+              onError={(e) => { e.target.src = '/placeholder.svg' }}
               className="w-full h-full object-contain p-6"
             />
           </div>
@@ -79,6 +80,7 @@ const ProductDetail = () => {
                   <img
                     src={getImageUrl(image.image)}
                     alt={image.alt_text}
+                    onError={(e) => { e.target.src = '/placeholder.svg' }}
                     className="w-full h-full object-contain p-1"
                   />
                 </div>

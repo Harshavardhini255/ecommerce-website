@@ -23,6 +23,7 @@ const ProductCard = ({ product }) => {
           <img
             src={getImageUrl(product.primary_image?.image)}
             alt={product.name}
+            onError={(e) => { e.target.src = '/placeholder.svg' }}
             className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
           />
           {product.discount_percentage > 0 && (

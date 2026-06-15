@@ -92,7 +92,7 @@ const Cart = () => {
           return (
           <div key={item.id} className="bg-white rounded-2xl border border-gray-100 p-4 flex gap-4">
             <Link to={`/products/${p.slug}`} className="w-20 h-20 bg-gray-50 rounded-xl overflow-hidden flex-shrink-0">
-              <img src={getImageUrl(p.primary_image?.image)} alt={p.name} className="w-full h-full object-contain p-2" />
+              <img src={getImageUrl(p.primary_image?.image)} alt={p.name} onError={(e) => { e.target.src = '/placeholder.svg' }} className="w-full h-full object-contain p-2" />
             </Link>
             <div className="flex-1 min-w-0">
               <Link to={`/products/${p.slug}`} className="text-sm font-medium text-gray-900 hover:text-primary-600 line-clamp-1">{p.name}</Link>

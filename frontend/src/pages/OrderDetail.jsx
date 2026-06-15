@@ -67,7 +67,7 @@ const OrderDetail = () => {
             {currentOrder.items.map((item) => (
               <div key={item.id} className="flex gap-3">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl overflow-hidden flex-shrink-0">
-                  <img src={getImageUrl(item.product_image)} alt={item.product_name} className="w-full h-full object-contain p-1.5" />
+                  <img src={getImageUrl(item.product_image)} alt={item.product_name} onError={(e) => { e.target.src = '/placeholder.svg' }} className="w-full h-full object-contain p-1.5" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900">{item.product_name}</p>
