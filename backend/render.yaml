@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: ecommerce-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn config.wsgi --log-file -
+    preDeployCommand: python manage.py migrate --noinput && python manage.py collectstatic --noinput
