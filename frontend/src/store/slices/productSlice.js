@@ -109,7 +109,7 @@ const productSlice = createSlice({
       })
       // Fetch Categories
       .addCase(fetchCategories.fulfilled, (state, action) => {
-        state.categories = action.payload
+        state.categories = action.payload.results || action.payload
       })
   },
 })

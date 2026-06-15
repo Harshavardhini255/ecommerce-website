@@ -1,4 +1,4 @@
-from django.db import models
+﻿from django.db import models
 from django.contrib.auth import get_user_model
 from apps.products.models import Product
 import uuid
@@ -7,8 +7,6 @@ User = get_user_model()
 
 
 class Order(models.Model):
-    """Order model."""
-    
     STATUS_CHOICES = (
         ('pending', 'Pending'),
         ('processing', 'Processing'),
@@ -28,7 +26,6 @@ class Order(models.Model):
     order_number = models.CharField(max_length=100, unique=True, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     
-    # Shipping address
     shipping_full_name = models.CharField(max_length=255)
     shipping_phone = models.CharField(max_length=20)
     shipping_address_line1 = models.CharField(max_length=255)
@@ -38,7 +35,6 @@ class Order(models.Model):
     shipping_postal_code = models.CharField(max_length=20)
     shipping_country = models.CharField(max_length=100)
     
-    # Billing address (optional, can be same as shipping)
     billing_full_name = models.CharField(max_length=255, blank=True)
     billing_phone = models.CharField(max_length=20, blank=True)
     billing_address_line1 = models.CharField(max_length=255, blank=True)
@@ -48,7 +44,6 @@ class Order(models.Model):
     billing_postal_code = models.CharField(max_length=20, blank=True)
     billing_country = models.CharField(max_length=100, blank=True)
     
-    # Order details
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default='pending')
     payment_method = models.CharField(max_length=50, blank=True)
@@ -61,7 +56,6 @@ class Order(models.Model):
     
     notes = models.TextField(blank=True)
     
-    # Tracking
     tracking_number = models.CharField(max_length=100, blank=True)
     carrier = models.CharField(max_length=100, blank=True)
     
@@ -78,18 +72,14 @@ class Order(models.Model):
     
     def save(self, *args, **kwargs):
         if not self.order_number:
-            # Generate unique order number
             self.order_number = f"ORD-{uuid.uuid4().hex[:8].upper()}"
         super().save(*args, **kwargs)
 
 
 class OrderItem(models.Model):
-    """Order item model."""
-    
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     
-    # Store product details at time of order
     product_name = models.CharField(max_length=255)
     product_sku = models.CharField(max_length=100)
     product_price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -107,12 +97,12 @@ class OrderItem(models.Model):
     
     @property
     def total_price(self):
-        return self.product_price * self.quantity
+        if self.product_price and self.quantity:
+            return self.product_price * self.quantity
+        return 0
 
 
 class OrderStatusHistory(models.Model):
-    """Order status history model."""
-    
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='status_history')
     status = models.CharField(max_length=20)
     notes = models.TextField(blank=True)

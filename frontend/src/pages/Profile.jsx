@@ -1,212 +1,90 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getCurrentUser } from '../store/slices/authSlice'
-import authService from '../services/authService'
-import { toast } from 'react-toastify'
-import Loading from '../components/Loading'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { fetchMyOrders } from '../store/slices/orderSlice'
+import { FiUser, FiPackage, FiMail, FiCalendar } from 'react-icons/fi'
+import { formatPrice } from '../utils/imageUtils'
 
 const Profile = () => {
   const dispatch = useDispatch()
-  const { user, loading } = useSelector((state) => state.auth)
-  const [isEditing, setIsEditing] = useState(false)
-  const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
-    phone: '',
-    address_line1: '',
-    address_line2: '',
-    city: '',
-    state: '',
-    postal_code: '',
-    country: '',
-  })
+  const { user, isAuthenticated } = useSelector((state) => state.auth)
+  const { items } = useSelector((state) => state.orders)
 
   useEffect(() => {
-    dispatch(getCurrentUser())
-  }, [dispatch])
+    if (isAuthenticated) dispatch(fetchMyOrders())
+  }, [isAuthenticated, dispatch])
 
-  useEffect(() => {
-    if (user) {
-      setFormData({
-        first_name: user.first_name || '',
-        last_name: user.last_name || '',
-        phone: user.phone || '',
-        address_line1: user.address_line1 || '',
-        address_line2: user.address_line2 || '',
-        city: user.city || '',
-        state: user.state || '',
-        postal_code: user.postal_code || '',
-        country: user.country || '',
-      })
-    }
-  }, [user])
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center px-4">
+        <div className="text-center max-w-sm">
+          <FiUser className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Sign in to view profile</h2>
+          <p className="text-sm text-gray-500 mb-6">Please sign in to see your profile.</p>
+          <Link to="/login" className="btn btn-primary px-8 py-3">Sign in</Link>
+        </div>
+      </div>
+    )
   }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      await authService.updateProfile(formData)
-      dispatch(getCurrentUser())
-      setIsEditing(false)
-      toast.success('Profile updated successfully')
-    } catch (error) {
-      toast.error('Failed to update profile')
-    }
-  }
-
-  if (loading) return <Loading />
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-2xl mx-auto">
-        <div className="card">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-3xl font-bold">My Profile</h1>
-            <button
-              onClick={() => setIsEditing(!isEditing)}
-              className="btn btn-secondary"
-            >
-              {isEditing ? 'Cancel' : 'Edit Profile'}
-            </button>
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+      <h1 className="text-xl font-bold text-gray-900 mb-6">My Profile</h1>
+
+      <div className="space-y-4">
+        {/* Info */}
+        <div className="bg-white rounded-2xl border border-gray-100 p-4">
+          <div className="flex items-center space-x-4 mb-4">
+            <div className="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center">
+              <span className="text-lg font-bold text-primary-600">
+                {user?.first_name?.[0]}{user?.last_name?.[0]}
+              </span>
+            </div>
+            <div>
+              <p className="text-base font-semibold text-gray-900">{user?.first_name} {user?.last_name}</p>
+              <p className="text-sm text-gray-500">@{user?.username}</p>
+            </div>
           </div>
-
-          <form onSubmit={handleSubmit}>
-            {/* Personal Information */}
-            <div className="mb-6">
-              <h2 className="text-xl font-semibold mb-4">Personal Information</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">First Name</label>
-                  <input
-                    type="text"
-                    name="first_name"
-                    value={formData.first_name}
-                    onChange={handleChange}
-                    disabled={!isEditing}
-                    className="input"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Last Name</label>
-                  <input
-                    type="text"
-                    name="last_name"
-                    value={formData.last_name}
-                    onChange={handleChange}
-                    disabled={!isEditing}
-                    className="input"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Email</label>
-                  <input
-                    type="email"
-                    value={user?.email || ''}
-                    disabled
-                    className="input bg-gray-100"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Phone</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    disabled={!isEditing}
-                    className="input"
-                  />
-                </div>
-              </div>
+          <div className="space-y-2 text-sm">
+            <div className="flex items-center text-gray-600">
+              <FiMail className="w-4 h-4 mr-2 text-gray-400" />
+              {user?.email}
             </div>
-
-            {/* Address */}
-            <div className="mb-6">
-              <h2 className="text-xl font-semibold mb-4">Address</h2>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Address Line 1</label>
-                  <input
-                    type="text"
-                    name="address_line1"
-                    value={formData.address_line1}
-                    onChange={handleChange}
-                    disabled={!isEditing}
-                    className="input"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Address Line 2</label>
-                  <input
-                    type="text"
-                    name="address_line2"
-                    value={formData.address_line2}
-                    onChange={handleChange}
-                    disabled={!isEditing}
-                    className="input"
-                  />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">City</label>
-                    <input
-                      type="text"
-                      name="city"
-                      value={formData.city}
-                      onChange={handleChange}
-                      disabled={!isEditing}
-                      className="input"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">State</label>
-                    <input
-                      type="text"
-                      name="state"
-                      value={formData.state}
-                      onChange={handleChange}
-                      disabled={!isEditing}
-                      className="input"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Postal Code</label>
-                    <input
-                      type="text"
-                      name="postal_code"
-                      value={formData.postal_code}
-                      onChange={handleChange}
-                      disabled={!isEditing}
-                      className="input"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Country</label>
-                    <input
-                      type="text"
-                      name="country"
-                      value={formData.country}
-                      onChange={handleChange}
-                      disabled={!isEditing}
-                      className="input"
-                    />
-                  </div>
-                </div>
-              </div>
+            <div className="flex items-center text-gray-600">
+              <FiCalendar className="w-4 h-4 mr-2 text-gray-400" />
+              Joined {user?.date_joined ? new Date(user.date_joined).toLocaleDateString('en-IN', { year: 'numeric', month: 'long' }) : 'N/A'}
             </div>
+          </div>
+        </div>
 
-            {isEditing && (
-              <button type="submit" className="btn btn-primary w-full">
-                Save Changes
-              </button>
-            )}
-          </form>
+        {/* Recent Orders */}
+        <div className="bg-white rounded-2xl border border-gray-100 p-4">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-semibold text-gray-900">Recent Orders</h2>
+            <Link to="/orders" className="text-xs font-medium text-primary-600 hover:text-primary-700">View all</Link>
+          </div>
+          {items.length > 0 ? (
+            <div className="space-y-2">
+              {items.slice(0, 3).map((order) => (
+                <Link key={order.id} to={`/orders/${order.id}`} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">Order #{order.id}</p>
+                    <p className="text-xs text-gray-400">{new Date(order.created_at).toLocaleDateString('en-IN')}</p>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <span className="text-sm font-bold text-gray-900">{formatPrice(order.total_amount)}</span>
+                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                      order.status === 'delivered' ? 'bg-green-100 text-green-700' :
+                      order.status === 'shipped' ? 'bg-blue-100 text-blue-700' :
+                      order.status === 'cancelled' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'
+                    }`}>{order.status}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-gray-400 py-4 text-center">No orders yet.</p>
+          )}
         </div>
       </div>
     </div>

@@ -48,8 +48,8 @@ class PaymentViewSet(viewsets.ModelViewSet):
             try:
                 # Create Stripe payment intent
                 intent = stripe.PaymentIntent.create(
-                    amount=int(order.total * 100),  # Convert to cents
-                    currency='usd',
+                    amount=int(order.total * 100),  # Convert to paise
+                    currency='inr',
                     metadata={
                         'order_id': order.id,
                         'order_number': order.order_number,
@@ -63,7 +63,7 @@ class PaymentViewSet(viewsets.ModelViewSet):
                     user=request.user,
                     payment_method='stripe',
                     amount=order.total,
-                    currency='USD',
+                    currency='INR',
                     stripe_payment_intent_id=intent.id,
                     status='pending'
                 )
@@ -219,7 +219,7 @@ class RefundViewSet(viewsets.ModelViewSet):
                 # Create Stripe refund
                 refund = stripe.Refund.create(
                     payment_intent=payment.stripe_payment_intent_id,
-                    amount=int(amount * 100),  # Convert to cents
+                    amount=int(amount * 100),  # Convert to paise
                 )
                 
                 # Create refund record

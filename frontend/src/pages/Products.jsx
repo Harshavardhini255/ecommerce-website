@@ -1,136 +1,83 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts, fetchCategories } from '../store/slices/productSlice'
+import { fetchProducts } from '../store/slices/productSlice'
 import ProductCard from '../components/ProductCard'
-import Loading from '../components/Loading'
 
 const Products = () => {
   const dispatch = useDispatch()
-  const { products, categories, loading } = useSelector((state) => state.products)
-  const [filters, setFilters] = useState({
-    category: '',
-    min_price: '',
-    max_price: '',
-    search: '',
+  const [searchParams] = useSearchParams()
+  const { products, loading } = useSelector((state) => state.products)
+  const [sortBy, setSortBy] = useState('newest')
+
+  const categoryFilter = searchParams.get('category') || ''
+  const searchFilter = searchParams.get('search') || ''
+
+  useEffect(() => {
+    dispatch(fetchProducts({ category: categoryFilter, search: searchFilter }))
+  }, [dispatch, categoryFilter, searchFilter])
+
+  const sortedItems = [...products].sort((a, b) => {
+    if (sortBy === 'price-low') return a.price - b.price
+    if (sortBy === 'price-high') return b.price - a.price
+    if (sortBy === 'rating') return (b.average_rating || 0) - (a.average_rating || 0)
+    return 0
   })
 
-  useEffect(() => {
-    dispatch(fetchCategories())
-  }, [dispatch])
-
-  useEffect(() => {
-    const params = {}
-    if (filters.category) params.category = filters.category
-    if (filters.min_price) params.min_price = filters.min_price
-    if (filters.max_price) params.max_price = filters.max_price
-    if (filters.search) params.search = filters.search
-
-    dispatch(fetchProducts(params))
-  }, [dispatch, filters])
-
-  const handleFilterChange = (e) => {
-    setFilters({
-      ...filters,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const clearFilters = () => {
-    setFilters({
-      category: '',
-      min_price: '',
-      max_price: '',
-      search: '',
-    })
-  }
+  const womenKeywords = ['women', 'girl', 'fashion', 'beauty', 'accessories', 'jewelry', 'footwear', 'handbag', 'makeup', 'skincare', 'ethnic', 'western', 'dress', 'top', 'heel']
+  const filteredItems = categoryFilter
+    ? sortedItems
+    : sortedItems.filter((p) =>
+        womenKeywords.some((kw) => (p.name || '').toLowerCase().includes(kw) || (p.category_name || '').toLowerCase().includes(kw))
+      )
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Products</h1>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div>
+          <h1 className="text-xl font-bold text-gray-900">
+            {searchFilter ? `Results for "${searchFilter}"` : categoryFilter ? categoryFilter.toUpperCase() : 'All Products'}
+          </h1>
+          <p className="text-sm text-gray-500 mt-0.5">{filteredItems.length} products</p>
+        </div>
+        {filteredItems.length > 1 && (
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="text-sm border border-gray-200 rounded-full px-4 py-2 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+          >
+            <option value="newest">Newest</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        )}
+      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        {/* Filters Sidebar */}
-        <div className="lg:col-span-1">
-          <div className="card sticky top-20">
-            <h2 className="text-xl font-semibold mb-4">Filters</h2>
-
-            {/* Search */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-2">Search</label>
-              <input
-                type="text"
-                name="search"
-                value={filters.search}
-                onChange={handleFilterChange}
-                placeholder="Search products..."
-                className="input"
-              />
-            </div>
-
-            {/* Category */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-2">Category</label>
-              <select
-                name="category"
-                value={filters.category}
-                onChange={handleFilterChange}
-                className="input"
-              >
-                <option value="">All Categories</option>
-                {categories.map((category) => (
-                  <option key={category.id} value={category.slug}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Price Range */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-2">Price Range</label>
-              <div className="flex space-x-2">
-                <input
-                  type="number"
-                  name="min_price"
-                  value={filters.min_price}
-                  onChange={handleFilterChange}
-                  placeholder="Min"
-                  className="input"
-                />
-                <input
-                  type="number"
-                  name="max_price"
-                  value={filters.max_price}
-                  onChange={handleFilterChange}
-                  placeholder="Max"
-                  className="input"
-                />
+      {loading ? (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {Array.from({ length: 10 }).map((_, i) => (
+            <div key={i} className="bg-white rounded-2xl overflow-hidden animate-pulse">
+              <div className="bg-gray-100" style={{ aspectRatio: '1/1' }} />
+              <div className="p-3 space-y-2">
+                <div className="h-2.5 bg-gray-100 rounded w-1/3" />
+                <div className="h-3 bg-gray-100 rounded w-2/3" />
+                <div className="h-3 bg-gray-100 rounded w-1/2" />
               </div>
             </div>
-
-            <button onClick={clearFilters} className="btn btn-secondary w-full">
-              Clear Filters
-            </button>
-          </div>
+          ))}
         </div>
-
-        {/* Products Grid */}
-        <div className="lg:col-span-3">
-          {loading ? (
-            <Loading />
-          ) : products.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-600 text-lg">No products found.</p>
-            </div>
-          )}
+      ) : filteredItems.length > 0 ? (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {filteredItems.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </div>
-      </div>
+      ) : (
+        <div className="text-center py-20 bg-white rounded-2xl border border-gray-100">
+          <p className="text-gray-400 text-sm">No products found.</p>
+        </div>
+      )}
     </div>
   )
 }

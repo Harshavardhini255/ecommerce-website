@@ -1,91 +1,92 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import orderService from '../services/orderService'
-import { useState } from 'react'
-import Loading from '../components/Loading'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchMyOrders } from '../store/slices/orderSlice'
+import { FiPackage } from 'react-icons/fi'
+import { formatPrice } from '../utils/imageUtils'
+import { toast } from 'react-toastify'
 
 const Orders = () => {
-  const [orders, setOrders] = useState([])
-  const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
+  const { items, loading, error } = useSelector((state) => state.orders)
+  const { isAuthenticated } = useSelector((state) => state.auth)
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const data = await orderService.getOrders()
-        setOrders(data)
-      } catch (error) {
-        console.error('Failed to fetch orders:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
+    if (isAuthenticated) dispatch(fetchMyOrders())
+  }, [isAuthenticated, dispatch])
 
-    fetchOrders()
-  }, [])
+  useEffect(() => {
+    if (error) toast.error(typeof error === 'string' ? error : 'Failed to load orders')
+  }, [error])
 
-  const getStatusColor = (status) => {
-    const colors = {
-      pending: 'bg-yellow-100 text-yellow-800',
-      processing: 'bg-blue-100 text-blue-800',
-      shipped: 'bg-purple-100 text-purple-800',
-      delivered: 'bg-green-100 text-green-800',
-      cancelled: 'bg-red-100 text-red-800',
-    }
-    return colors[status] || 'bg-gray-100 text-gray-800'
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center px-4">
+        <div className="text-center max-w-sm">
+          <FiPackage className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Sign in to view orders</h2>
+          <p className="text-sm text-gray-500 mb-6">Please sign in to see your orders.</p>
+          <Link to="/login" className="btn btn-primary px-8 py-3">Sign in</Link>
+        </div>
+      </div>
+    )
   }
 
-  if (loading) return <Loading />
-
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">My Orders</h1>
-
-      {orders.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-gray-600 mb-4">You haven't placed any orders yet.</p>
-          <Link to="/products" className="btn btn-primary">
-            Start Shopping
-          </Link>
-        </div>
-      ) : (
-        <div className="space-y-4">
-          {orders.map((order) => (
-            <Link key={order.id} to={`/orders/${order.id}`}>
-              <div className="card hover:shadow-lg transition-shadow">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                  <div className="mb-4 md:mb-0">
-                    <h3 className="text-lg font-semibold mb-1">
-                      Order #{order.order_number}
-                    </h3>
-                    <p className="text-sm text-gray-600">
-                      {new Date(order.created_at).toLocaleDateString()}
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      {order.items_count} item(s)
-                    </p>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <div className="text-right">
-                      <p className="text-2xl font-bold text-primary-600">
-                        ${order.total}
-                      </p>
-                    </div>
-                    <div>
-                      <span
-                        className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                          getStatusColor(order.status)
-                        }`}
-                      >
-                        {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
+  if (loading) {
+    return (
+      <div className="max-w-3xl mx-auto px-4 py-10">
+        <div className="space-y-3">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="bg-white rounded-2xl p-4 animate-pulse space-y-2">
+              <div className="h-3 bg-gray-100 rounded w-1/3" />
+              <div className="h-3 bg-gray-100 rounded w-1/4" />
+            </div>
           ))}
         </div>
-      )}
+      </div>
+    )
+  }
+
+  if (items.length === 0) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center px-4">
+        <div className="text-center max-w-sm">
+          <FiPackage className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <h2 className="text-xl font-bold text-gray-900 mb-2">No orders yet</h2>
+          <p className="text-sm text-gray-500 mb-6">Start shopping to see your orders here.</p>
+          <Link to="/products" className="btn btn-primary px-8 py-3">Start Shopping</Link>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+      <h1 className="text-xl font-bold text-gray-900 mb-6">My Orders ({items.length})</h1>
+      <div className="space-y-3">
+        {items.map((order) => (
+          <Link key={order.id} to={`/orders/${order.id}`} className="block bg-white rounded-2xl border border-gray-100 p-4 hover:shadow-md transition-shadow">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <p className="text-sm font-medium text-gray-900">Order #{order.id}</p>
+                <p className="text-xs text-gray-400">{new Date(order.created_at).toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+              </div>
+              <span className={`text-xs font-semibold px-3 py-1 rounded-full ${
+                order.status === 'delivered' ? 'bg-green-100 text-green-700' :
+                order.status === 'shipped' ? 'bg-blue-100 text-blue-700' :
+                order.status === 'cancelled' ? 'bg-red-100 text-red-700' :
+                'bg-yellow-100 text-yellow-700'
+              }`}>
+                {order.status}
+              </span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-500">{order.items?.length || 0} item(s)</span>
+              <span className="font-bold text-gray-900">{formatPrice(order.total_amount)}</span>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   )
 }
