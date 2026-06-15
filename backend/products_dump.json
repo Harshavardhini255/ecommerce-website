@@ -1,0 +1,814 @@
+[
+{
+  "model": "products.category",
+  "pk": 1,
+  "fields": {
+    "name": "ETHNICS",
+    "slug": "ethnics",
+    "description": "",
+    "image": "",
+    "parent": null,
+    "is_active": true,
+    "created_at": "2026-06-15T08:02:25.555Z",
+    "updated_at": "2026-06-15T08:02:25.555Z"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 2,
+  "fields": {
+    "name": "CASUALS",
+    "slug": "casuals",
+    "description": "",
+    "image": "",
+    "parent": null,
+    "is_active": true,
+    "created_at": "2026-06-15T08:02:33.795Z",
+    "updated_at": "2026-06-15T08:02:33.795Z"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 3,
+  "fields": {
+    "name": "PARTY WEAR",
+    "slug": "party-wear",
+    "description": "",
+    "image": "",
+    "parent": null,
+    "is_active": true,
+    "created_at": "2026-06-15T08:02:44.868Z",
+    "updated_at": "2026-06-15T08:02:44.868Z"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 4,
+  "fields": {
+    "name": "SALWAR",
+    "slug": "salwar",
+    "description": "",
+    "image": "",
+    "parent": null,
+    "is_active": true,
+    "created_at": "2026-06-15T08:03:07.551Z",
+    "updated_at": "2026-06-15T08:03:07.551Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 2,
+  "fields": {
+    "name": "south special cotton slik",
+    "slug": "south-special-cotton-slik",
+    "description": "a classyy vibe with very own stiched cloth",
+    "short_description": "",
+    "category": 1,
+    "price": "1099.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "ET-BLK-001",
+    "barcode": "",
+    "stock_quantity": 15,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 7,
+    "created_at": "2026-06-15T08:26:16.337Z",
+    "updated_at": "2026-06-15T08:26:16.337Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 3,
+  "fields": {
+    "name": "stiched ethnic wear",
+    "slug": "stiched-ethnic-wear",
+    "description": "ready to wear traditionals",
+    "short_description": "",
+    "category": 1,
+    "price": "1599.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "ETH-BLK-002",
+    "barcode": "",
+    "stock_quantity": 13,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 3,
+    "created_at": "2026-06-15T08:44:55.548Z",
+    "updated_at": "2026-06-15T08:44:55.548Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 5,
+  "fields": {
+    "name": "pastal shade traditional dress",
+    "slug": "pastal-shade-traditional-dress",
+    "description": "ready to wear comfy wear",
+    "short_description": "",
+    "category": 1,
+    "price": "1455.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "ET-BLK-003",
+    "barcode": "",
+    "stock_quantity": 0,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 0,
+    "created_at": "2026-06-15T12:25:02.241Z",
+    "updated_at": "2026-06-15T12:25:02.241Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 6,
+  "fields": {
+    "name": "royal green with pink anarkali",
+    "slug": "royal-green-with-pink-anarkali",
+    "description": "royal green with pink ready to wear traditional wear",
+    "short_description": "",
+    "category": 1,
+    "price": "1776.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "ET-BLK-004",
+    "barcode": "",
+    "stock_quantity": 11,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": false,
+    "views_count": 0,
+    "created_at": "2026-06-15T12:30:33.634Z",
+    "updated_at": "2026-06-15T12:34:13.648Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 7,
+  "fields": {
+    "name": "royal full pink anarkali",
+    "slug": "royal-full-pink-anarkali",
+    "description": "a classy ready to wear anarkali set",
+    "short_description": "",
+    "category": 1,
+    "price": "767.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "ETH-BLK-005",
+    "barcode": "",
+    "stock_quantity": 15,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 0,
+    "created_at": "2026-06-15T12:39:37.800Z",
+    "updated_at": "2026-06-15T12:40:42.065Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 8,
+  "fields": {
+    "name": "fashion trendy outfit",
+    "slug": "fashion-trendy-outfit",
+    "description": "go to outfit for every girls daily",
+    "short_description": "",
+    "category": 2,
+    "price": "899.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "TS-BLK-001",
+    "barcode": "",
+    "stock_quantity": 15,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 1,
+    "created_at": "2026-06-15T12:46:51.548Z",
+    "updated_at": "2026-06-15T12:46:51.548Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 9,
+  "fields": {
+    "name": "cool tang top plus shirt",
+    "slug": "cool-tang-top-plus-shirt",
+    "description": "clasyy vibe with the stripped shirt and the jean",
+    "short_description": "",
+    "category": 2,
+    "price": "1099.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "TS-BLK-003",
+    "barcode": "",
+    "stock_quantity": 14,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 0,
+    "created_at": "2026-06-15T12:51:19.455Z",
+    "updated_at": "2026-06-15T12:51:19.455Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 10,
+  "fields": {
+    "name": "pretty cool summer outfits",
+    "slug": "pretty-cool-summer-outfits",
+    "description": "cool summer fashion outfits",
+    "short_description": "",
+    "category": 2,
+    "price": "1056.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "TS-BLK-004",
+    "barcode": "",
+    "stock_quantity": 11,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 1,
+    "created_at": "2026-06-15T12:55:53.762Z",
+    "updated_at": "2026-06-15T12:55:53.762Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 11,
+  "fields": {
+    "name": "cool print black t shirt",
+    "slug": "cool-print-black-t-shirt",
+    "description": "ready to wear fashion outfit",
+    "short_description": "",
+    "category": 2,
+    "price": "1088.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "ET-BLK-005",
+    "barcode": "",
+    "stock_quantity": 16,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 1,
+    "created_at": "2026-06-15T13:09:44.384Z",
+    "updated_at": "2026-06-15T13:09:44.384Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 12,
+  "fields": {
+    "name": "royal black party wear",
+    "slug": "royal-black-party-wear",
+    "description": "classy party vibes",
+    "short_description": "",
+    "category": 3,
+    "price": "988.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "PR-BB-001",
+    "barcode": "",
+    "stock_quantity": 11,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 0,
+    "created_at": "2026-06-15T13:18:40.579Z",
+    "updated_at": "2026-06-15T13:18:40.579Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 13,
+  "fields": {
+    "name": "royal green party wear",
+    "slug": "royal-green-party-wear",
+    "description": "royal green birthday outfit",
+    "short_description": "",
+    "category": 3,
+    "price": "1233.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "PR-BB-002",
+    "barcode": "",
+    "stock_quantity": 11,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 0,
+    "created_at": "2026-06-15T13:21:34.209Z",
+    "updated_at": "2026-06-15T13:21:34.209Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 14,
+  "fields": {
+    "name": "pretty cream color birthday outfit",
+    "slug": "pretty-cream-color-birthday-outfit",
+    "description": "ready to wear birthday outfit",
+    "short_description": "",
+    "category": 3,
+    "price": "899.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "PR-BB-003",
+    "barcode": "",
+    "stock_quantity": 12,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 0,
+    "created_at": "2026-06-15T13:24:52.562Z",
+    "updated_at": "2026-06-15T13:24:52.562Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 15,
+  "fields": {
+    "name": "brown midi dress",
+    "slug": "brown-midi-dress",
+    "description": "brown midi dress with puff sleves",
+    "short_description": "",
+    "category": 3,
+    "price": "878.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "PR-BB-005",
+    "barcode": "",
+    "stock_quantity": 12,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 0,
+    "created_at": "2026-06-15T13:32:20.505Z",
+    "updated_at": "2026-06-15T13:32:20.505Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 16,
+  "fields": {
+    "name": "bareeki salwar",
+    "slug": "bareeki-salwar",
+    "description": "ready to wear office salwar",
+    "short_description": "",
+    "category": 4,
+    "price": "978.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "SR-BB-001",
+    "barcode": "",
+    "stock_quantity": 15,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 0,
+    "created_at": "2026-06-15T13:36:35.942Z",
+    "updated_at": "2026-06-15T13:36:35.942Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 17,
+  "fields": {
+    "name": "white with violet salwar",
+    "slug": "white-with-violet-salwar",
+    "description": "elegant office vibes with pretty salwar",
+    "short_description": "",
+    "category": 4,
+    "price": "1288.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "SR-BB-003",
+    "barcode": "",
+    "stock_quantity": 10,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 0,
+    "created_at": "2026-06-15T14:03:12.390Z",
+    "updated_at": "2026-06-15T14:03:12.390Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 18,
+  "fields": {
+    "name": "navy blue salwar set",
+    "slug": "navy-blue-salwar-set",
+    "description": "pretty navy blue salwar set",
+    "short_description": "",
+    "category": 4,
+    "price": "899.00",
+    "compare_price": null,
+    "cost_price": null,
+    "sku": "SR-BB-004",
+    "barcode": "",
+    "stock_quantity": 10,
+    "low_stock_threshold": 10,
+    "weight": null,
+    "is_active": true,
+    "is_featured": true,
+    "views_count": 0,
+    "created_at": "2026-06-15T14:05:47.725Z",
+    "updated_at": "2026-06-15T14:05:47.725Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 3,
+  "fields": {
+    "product": 2,
+    "image": "products/South_Special_Cotton_Silk_Gowns_for_Women_ootd_shopnow_fashion_ArtistryC_10-9-25.jpg",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T08:26:16.355Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 4,
+  "fields": {
+    "product": 2,
+    "image": "products/South_Special_Cotton_Silk_Gowns_for_Women_ootd_shopnow_fashion_ArtistryC_10-9-2_gtOuD5t.jpg",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T08:26:30.516Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 5,
+  "fields": {
+    "product": 3,
+    "image": "products/classic_gown.jpg",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T08:44:55.568Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 6,
+  "fields": {
+    "product": 3,
+    "image": "products/classic_gown_sWLeG2s.jpg",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T08:45:13.254Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 9,
+  "fields": {
+    "product": 5,
+    "image": "products/classic_gown_Cwai04s.jpg",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T12:25:02.261Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 10,
+  "fields": {
+    "product": 5,
+    "image": "products/classic_gown_sK6VJE0.jpg",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T12:25:16.797Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 11,
+  "fields": {
+    "product": 6,
+    "image": "products/891431320005662960.jpg",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T12:30:33.643Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 12,
+  "fields": {
+    "product": 6,
+    "image": "products/891431320005662960_JApoH6e.jpg",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T12:30:58.478Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 13,
+  "fields": {
+    "product": 7,
+    "image": "products/under_799Hot_Pink_Anarkali_Suit_Set____Wedding__Festive_Look_Shop_now_from_link_.jpg",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T12:39:37.807Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 14,
+  "fields": {
+    "product": 7,
+    "image": "products/under_799Hot_Pink_Anarkali_Suit_Set____Wedding__Festive_Look_Shop_now_from_link_yBgvl0T.jpg",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T12:39:49.705Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 15,
+  "fields": {
+    "product": 8,
+    "image": "products/Fashion_Trends_Vintage_outfits_Fashion_Everyday_Chic_Boho_Vacation.webp",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T12:46:51.556Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 16,
+  "fields": {
+    "product": 8,
+    "image": "products/Fashion_Trends_Vintage_outfits_Fashion_Everyday_Chic_Boho_Vacation_LrGaJ73.webp",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T12:46:58.263Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 17,
+  "fields": {
+    "product": 9,
+    "image": "products/Just_Me.jpg",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T12:51:19.462Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 18,
+  "fields": {
+    "product": 9,
+    "image": "products/Just_Me_I6Or9li.jpg",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T12:51:41.335Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 19,
+  "fields": {
+    "product": 10,
+    "image": "products/920212136381592634_1.jpg",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T12:55:53.769Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 20,
+  "fields": {
+    "product": 11,
+    "image": "products/.webp",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T13:09:44.394Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 21,
+  "fields": {
+    "product": 11,
+    "image": "products/.webp_aDxmkw8",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T13:10:04.399Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 22,
+  "fields": {
+    "product": 12,
+    "image": "products/328129522873936667.webp",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T13:18:40.587Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 23,
+  "fields": {
+    "product": 12,
+    "image": "products/328129522873936667_1.webp",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T13:19:06.681Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 24,
+  "fields": {
+    "product": 13,
+    "image": "products/instagram_explorepage_morefollowers_outfitinspiration_fashionstyle.webp",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T13:21:34.219Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 25,
+  "fields": {
+    "product": 13,
+    "image": "products/instagram_explorepage_morefollowers_outfitinspiration_fashionstyle_yg7XDdL.webp",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T13:22:05.316Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 26,
+  "fields": {
+    "product": 14,
+    "image": "products/.webp_G4eTCIE",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T13:24:52.573Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 27,
+  "fields": {
+    "product": 14,
+    "image": "products/.webp_hiLrLuw",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T13:25:07.354Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 28,
+  "fields": {
+    "product": 15,
+    "image": "products/Amazon_Finds_Brown_Smocked_Midi_Dress_for_Women___Puff_Sleeve_Square_Neck_A-Lin_7p3J1ql.jpg",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T13:32:20.518Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 29,
+  "fields": {
+    "product": 15,
+    "image": "products/Amazon_Finds_Brown_Smocked_Midi_Dress_for_Women___Puff_Sleeve_Square_Neck_A-Lin_Jwz5deT.jpg",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T13:32:41.015Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 30,
+  "fields": {
+    "product": 16,
+    "image": "products/Baareeki_-_An_Indian_ethnic_clothing_brand.webp",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T13:36:35.964Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 31,
+  "fields": {
+    "product": 16,
+    "image": "products/Baareeki_-_An_Indian_ethnic_clothing_brand_qOV9Yff.webp",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T13:36:53.010Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 32,
+  "fields": {
+    "product": 17,
+    "image": "products/download.webp",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T14:03:12.419Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 33,
+  "fields": {
+    "product": 17,
+    "image": "products/download_yvtyjsQ.webp",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T14:03:28.860Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 34,
+  "fields": {
+    "product": 18,
+    "image": "products/1123155594594090937.jpg",
+    "alt_text": "",
+    "is_primary": false,
+    "order": 0,
+    "created_at": "2026-06-15T14:05:47.734Z"
+  }
+},
+{
+  "model": "products.productimage",
+  "pk": 35,
+  "fields": {
+    "product": 18,
+    "image": "products/1123155594594090937_ptmPU4h.jpg",
+    "alt_text": "",
+    "is_primary": true,
+    "order": 0,
+    "created_at": "2026-06-15T14:06:13.862Z"
+  }
+}
+]
