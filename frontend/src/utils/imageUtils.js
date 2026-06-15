@@ -4,7 +4,7 @@ const MEDIA_BASE = API_BASE.replace('/api', '')
 export function getImageUrl(imagePath) {
   if (!imagePath) return '/placeholder.svg'
   if (imagePath.startsWith('http')) return imagePath
-  return `${MEDIA_BASE}${imagePath}`
+  return '/placeholder.svg'
 }
 
 export function formatPrice(price) {
