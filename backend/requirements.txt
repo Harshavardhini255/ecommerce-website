@@ -12,6 +12,9 @@ drf-spectacular==0.27.0
 psycopg[binary]>=3.3
 dj-database-url==2.1.0
 
+# Image handling
+Pillow>=10
+
 # Payment
 stripe==7.9.0
 
