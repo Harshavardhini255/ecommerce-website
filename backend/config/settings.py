@@ -146,6 +146,10 @@ CORS_ALLOWED_ORIGINS = env.list(
     ]
 )
 CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = [
+    'https://ecommerce-website-2-qykd.onrender.com',
+    'https://frontend-seven-taupe-leedifkhb0.vercel.app',
+]
 
 # Cache (local memory — no Redis needed)
 CACHES = {
