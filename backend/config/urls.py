@@ -4,22 +4,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.auth import get_user_model
-from django.http import JsonResponse
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
-
-def setup_admin(request):
-    User = get_user_model()
-    if User.objects.filter(is_superuser=True).exists():
-        return JsonResponse({'error': 'Superuser already exists'}, status=400)
-    email = 'admin@dharshaa.com'
-    password = 'Admin@123'
-    User.objects.create_superuser(email=email, username='admin', password=password)
-    return JsonResponse({'message': 'Superuser created', 'email': email, 'password': password})
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/setup-admin/', setup_admin, name='setup-admin'),
     
     # API Documentation
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
