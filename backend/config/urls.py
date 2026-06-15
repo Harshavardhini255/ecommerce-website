@@ -4,21 +4,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.http import JsonResponse
-import json, os
-
-def load_data(request):
-    from django.core.management import call_command
-    from io import StringIO
-    buf = StringIO()
-    path = os.path.join(settings.BASE_DIR, 'products_dump.json')
-    call_command('loaddata', path, stdout=buf)
-    return JsonResponse({'result': buf.getvalue()})
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/load-data/', load_data, name='load-data'),
     
     # API Documentation
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
